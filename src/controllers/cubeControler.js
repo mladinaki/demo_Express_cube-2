@@ -1,0 +1,27 @@
+const router = require('express').Router();
+const cubServices = require('../services/cubeService');
+
+
+router.get('/create', (req, res) => {
+    res.render('create');
+});
+
+router.post('/create', (req, res) => {
+    const { name, description, imageUrl, difficultyLevel } = req.body;
+    cubServices.create({ name, description, imageUrl, difficultyLevel: Number(difficultyLevel) });
+    res.redirect('/');
+})
+
+router.get('/:cubeId/details', (req, res) => {
+    const { cubeId } = req.params;
+    console.log(cubeId);
+    const cube = cubServices.singleCubes(cubeId);
+
+    if (!cube) {
+        res.redirect('/404');
+        return
+    }
+    res.render('details', { ...cube });
+})
+
+module.exports = router
