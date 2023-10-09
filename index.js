@@ -1,7 +1,6 @@
 const express = require('express');
 
 const { PORT } = require('./constant');
-
 const expressConfig = require('./src/config/expressConfig');
 const handlebarsConfig = require('./src/config/handlebarsConfig');
 const dbConnect = require('./src/config/dbConfig')
